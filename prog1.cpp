@@ -9,7 +9,7 @@ public:
     double cost;
     std::string supplier;
 
-    Product(int id, std::string name, double cost, std::string supplier) { // конструкт для создания товара
+    Product(int id, std::string name, double cost, std::string supplier) { // РєРѕРЅСЃС‚СЂСѓРєС‚ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С‚РѕРІР°СЂР°
         this->id = id;
         this->name = name;
         this->cost = cost;
@@ -17,12 +17,12 @@ public:
     }
 
     void printShortInfo() {
-        std::cout << "ID: " << id << ", Название: " << name << std::endl;
+        std::cout << "ID: " << id << ", РќР°Р·РІР°РЅРёРµ: " << name << std::endl;
     }
 
     void printFullInfo() {
-        std::cout << "ID: " << id << ", Название: " << name
-            << ", Себестоимость: " << cost << ", Поставщик: " << supplier << std::endl;
+        std::cout << "ID: " << id << ", РќР°Р·РІР°РЅРёРµ: " << name
+            << ", РЎРµР±РµСЃС‚РѕРёРјРѕСЃС‚СЊ: " << cost << ", РџРѕСЃС‚Р°РІС‰РёРє: " << supplier << std::endl;
     }
 };
 
@@ -33,16 +33,16 @@ private:
         Node* next;
         Node* prev;
 
-        Node(Product product) : product(product), next(nullptr), prev(nullptr) {} // конструкт для узла
+        Node(Product product) : product(product), next(nullptr), prev(nullptr) {} // РєРѕРЅСЃС‚СЂСѓРєС‚ РґР»СЏ СѓР·Р»Р°
     };
 
     Node* head;
     Node* tail;
 
 public:
-    ProductList() : head(nullptr), tail(nullptr) {} // конструкт для списка
+    ProductList() : head(nullptr), tail(nullptr) {} // РєРѕРЅСЃС‚СЂСѓРєС‚ РґР»СЏ СЃРїРёСЃРєР°
 
-    ~ProductList() { // очистка памяти
+    ~ProductList() { // РѕС‡РёСЃС‚РєР° РїР°РјСЏС‚Рё
         while (head) {
             Node* temp = head;
             head = head->next;
@@ -62,20 +62,20 @@ public:
         }
     }
 
-    void removeProduct(int id) { // удаление товара по айди
+    void removeProduct(int id) { // СѓРґР°Р»РµРЅРёРµ С‚РѕРІР°СЂР° РїРѕ Р°Р№РґРё
         Node* current = head;
         while (current) {
-            if (current->product.id == id) { // если с нужным ID
-                if (current->prev) { // Если есть узел
+            if (current->product.id == id) { // РµСЃР»Рё СЃ РЅСѓР¶РЅС‹Рј ID
+                if (current->prev) { // Р•СЃР»Рё РµСЃС‚СЊ СѓР·РµР»
                     current->prev->next = current->next;
                 }
-                else { // если 1 узел
+                else { // РµСЃР»Рё 1 СѓР·РµР»
                     head = current->next;
                 }
-                if (current->next) { // Если есть другой узел
+                if (current->next) { // Р•СЃР»Рё РµСЃС‚СЊ РґСЂСѓРіРѕР№ СѓР·РµР»
                     current->next->prev = current->prev;
                 }
-                else { // если это последний узел
+                else { // РµСЃР»Рё СЌС‚Рѕ РїРѕСЃР»РµРґРЅРёР№ СѓР·РµР»
                     tail = current->prev;
                 }
                 delete current;
@@ -83,10 +83,10 @@ public:
             }
             current = current->next;
         }
-        std::cout << "Товар с ID " << id << " не найден." << std::endl;
+        std::cout << "РўРѕРІР°СЂ СЃ ID " << id << " РЅРµ РЅР°Р№РґРµРЅ." << std::endl;
     }
 
-    void saveToFile(std::string filename) { // сохранение
+    void saveToFile(std::string filename) { // СЃРѕС…СЂР°РЅРµРЅРёРµ
         std::ofstream file(filename);
         Node* current = head;
         while (current) {
@@ -97,22 +97,22 @@ public:
             current = current->next;
         }
         file.close();
-        std::cout << "Список сохранен в файл " << filename << std::endl;
+        std::cout << "РЎРїРёСЃРѕРє СЃРѕС…СЂР°РЅРµРЅ РІ С„Р°Р№Р» " << filename << std::endl;
     }
 
-    void loadFromFile(std::string filename) { // загрузка из списка
+    void loadFromFile(std::string filename) { // Р·Р°РіСЂСѓР·РєР° РёР· СЃРїРёСЃРєР°
         std::ifstream file(filename);
         int id;
         std::string name, supplier;
         double cost;
         while (file >> id >> name >> cost >> supplier) {
-            addProduct(Product(id, name, cost, supplier)); // добавление в список
+            addProduct(Product(id, name, cost, supplier)); // РґРѕР±Р°РІР»РµРЅРёРµ РІ СЃРїРёСЃРѕРє
         }
         file.close();
-        std::cout << "Список загружен из файла " << filename << std::endl;
+        std::cout << "РЎРїРёСЃРѕРє Р·Р°РіСЂСѓР¶РµРЅ РёР· С„Р°Р№Р»Р° " << filename << std::endl;
     }
 
-    void printList() { // общий вывовд
+    void printList() { // РѕР±С‰РёР№ РІС‹РІРѕРІРґ
         Node* current = head;
         while (current) {
             current->product.printFullInfo();
@@ -125,16 +125,16 @@ int main() {
     setlocale(LC_ALL, "Russian");
     ProductList list;
 
-    list.addProduct(Product(1, "Товар 1", 100.0, "Поставщик 1")); // добавление товара в список
-    list.addProduct(Product(2, "Товар 2", 200.0, "Поставщик 2"));
+    list.addProduct(Product(1, "РўРѕРІР°СЂ 1", 100.0, "РџРѕСЃС‚Р°РІС‰РёРє 1")); // РґРѕР±Р°РІР»РµРЅРёРµ С‚РѕРІР°СЂР° РІ СЃРїРёСЃРѕРє
+    list.addProduct(Product(2, "РўРѕРІР°СЂ 2", 200.0, "РџРѕСЃС‚Р°РІС‰РёРє 2"));
 
-    std::cout << "Список товаров:" << std::endl;
+    std::cout << "РЎРїРёСЃРѕРє С‚РѕРІР°СЂРѕРІ:" << std::endl;
     list.printList();
 
-    std::cout << "Удаляем товар с ID 1..." << std::endl;
+    std::cout << "РЈРґР°Р»СЏРµРј С‚РѕРІР°СЂ СЃ ID 1..." << std::endl;
     list.removeProduct(1);
 
-    std::cout << "Список товаров после удаления:" << std::endl;
+    std::cout << "РЎРїРёСЃРѕРє С‚РѕРІР°СЂРѕРІ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ:" << std::endl;
     list.printList();
 
     list.saveToFile("products.txt");
@@ -142,7 +142,7 @@ int main() {
     ProductList newList;
     newList.loadFromFile("products.txt");
 
-    std::cout << "Загруженный список товаров:" << std::endl;
+    std::cout << "Р—Р°РіСЂСѓР¶РµРЅРЅС‹Р№ СЃРїРёСЃРѕРє С‚РѕРІР°СЂРѕРІ:" << std::endl;
     newList.printList();
 
     return 0;
