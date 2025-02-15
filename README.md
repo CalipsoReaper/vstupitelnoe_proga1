@@ -1,1 +1,0 @@
-# vstupitelnoe_proga1
